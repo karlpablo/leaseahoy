@@ -1,35 +1,78 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect, useRef } from 'react'
+import '@/App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import { AppContextProvider } from '@/AppContext'
+
+import NavBar from '@/components/NavBar'
+import Sidebar from '@/components/Sidebar'
+import Footer from '@/components/Footer'
+import HeroBanner from '@/components/HeroBanner'
+import ModelBanner from '@/components/ModelBanner'
+import TrimCard from '@/components/TrimCard'
+import LeaseProgramModal from '@/components/LeaseProgramModal'
+
+export default function App() {
+  const [meta, setMeta] = useState()
+  useEffect(() => {
+    let stale = false
+    async function runEffect() {
+      const response = await fetch('/meta.json')
+
+      if (!stale) {
+        setMeta(await response.json())
+      }
+    }
+    runEffect()
+    return () => stale = true
+  }, [])
+
+  const firstField = useRef(null)
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false)
+  function toggleSidebar() {
+    setSidebarIsOpen(!sidebarIsOpen)
+  }
+
+  function handleGetStarted() {
+    firstField.current.focus()
+    toggleSidebar()
+  }
+
+  const [userSelections, setUserSelections] = useState()
+  const [searchResults, setSearchResults] = useState([])
+  function handleSelectionsChange(newSelections) {
+    setUserSelections(newSelections)
+    setSearchResults(newSelections.selectedTrims)
+    if (sidebarIsOpen) toggleSidebar() // mobile only
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <AppContextProvider>
+      {meta && (<>
+        <div className="grid h-[100dvh] grid-cols-[auto] grid-rows-[auto_1fr_auto]">
+          <NavBar onMenuClick={toggleSidebar} />
+          <main className="overflow-hidden">
+            <div className="drawer lg:drawer-open h-full">
+              <input type="checkbox" id="sidebar" className="drawer-toggle" checked={sidebarIsOpen} readOnly />
+              <div className="drawer-content bg-slate-600 overflow-y-auto p-4 lg:p-6 space-y-4">
+                {userSelections ? (
+                  <>
+                    <ModelBanner userSelections={userSelections} />
+                    {searchResults.map(trim => <TrimCard key={trim} trim={trim} />)}
+                  </>
+                ) : (
+                  <HeroBanner onGetStarted={handleGetStarted} />
+                )}
+              </div>
+              <div className="drawer-side z-50 lg:h-full">
+                <Sidebar meta={meta} onChange={handleSelectionsChange} firstField={firstField} />
+                <label htmlFor="sidebar" className="drawer-overlay z-10" onClick={toggleSidebar}></label> 
+              </div>
+            </div>
+          </main>
+          <Footer />
+        </div>
+        <LeaseProgramModal />
+      </>)}
+    </AppContextProvider>
   )
 }
-
-export default App
