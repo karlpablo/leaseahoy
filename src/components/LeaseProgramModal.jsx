@@ -54,16 +54,16 @@ export default function LeaseProgramModal() {
         <div className="space-y-6">
           <div className={"p-6 flex flex-col md:flex-row justify-between items-center rounded-2xl gap-4 " + priceClass}>
             <div className="text-center md:text-left tracking-tight">
-              <div className="font-extrabold">2024 Subaru Outback</div>
-              <h3 className="text-md lg:text-xl">{trim?.name}</h3>
+              <div className="font-extrabold">{trim.year} {trim.make} {trim.model}</div>
+              <h3 className="text-md lg:text-xl">{trim.trim} {trim.style}</h3>
             </div>
             <PriceTag config={priceTagConfig} />
           </div>
           <div className="stats stats-vertical lg:stats-horizontal shadow w-full bg-base-200 tracking-tight">
             <div className="stat lg:place-items-end">
               <div className="stat-title">MSRP</div>
-              <div className="stat-value text-xl lg:text-3xl font-mono">{$(trim.msrp + trim.destination)}</div>
-              <div className="stat-desc">Inc. {$(trim.destination)} Destination Fee</div>
+              <div className="stat-value text-xl lg:text-3xl font-mono">{$(trim.price.msrp + trim.price.destination)}</div>
+              <div className="stat-desc">Inc. {$(trim.price.destination)} Destination Fee</div>
             </div>
             <div className="stat lg:place-items-end">
               <div className="stat-title">Term &amp; Mileage</div>

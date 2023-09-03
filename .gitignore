@@ -25,5 +25,4 @@ dist-ssr
 
 # Local Netlify folder
 .netlify
-
-*.ignore.*
+api/data/trims.json

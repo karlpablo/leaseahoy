@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { comma } from '@/utils'
 import LeaseProgram from '@/components/LeaseProgram'
 
-export default function LeaseSchedule({ trim, leaseData }) {
+export default function LeaseSchedule({ trim }) {
   const [programs, setPrograms] = useState([])
 
   useEffect(() => {
@@ -13,11 +13,11 @@ export default function LeaseSchedule({ trim, leaseData }) {
     // const isZeroDriveOff = false
     const taxRate = 1
 
-    const sellingPrice = trim.msrp + trim.destination
+    const sellingPrice = trim.price.msrp + trim.price.destination
     const grossCapCost = sellingPrice + dealerFees
     const netCapCost = grossCapCost - (downpayments + rebates + tradeIn)
 
-    const updatedPrograms = leaseData.programs.map(program => {
+    const updatedPrograms = trim.leaseData.programs.map(program => {
       const calc = {}
 
       // Money factor expressed as APR
@@ -70,7 +70,7 @@ export default function LeaseSchedule({ trim, leaseData }) {
     })
 
     setPrograms(updatedPrograms)
-  }, [leaseData.programs, trim.destination, trim.msrp])
+  }, [])
 
   function getProgram(term, mileage) {
     const program = programs.find(p => p.mileage === mileage && p.term === term)
@@ -84,7 +84,7 @@ export default function LeaseSchedule({ trim, leaseData }) {
           <th className="text-center">
             Base<br />Monthly
           </th>
-          {leaseData.terms.map(term => (
+          {trim.leaseData.terms.map(term => (
             <th className="text-center" key={term}>
               {term}<br />months
             </th>
@@ -92,12 +92,12 @@ export default function LeaseSchedule({ trim, leaseData }) {
         </tr>
       </thead>
       <tbody>
-        {leaseData.mileages.map(mileage => (
+        {trim.leaseData.mileages.map(mileage => (
           <tr key={mileage}>
             <th className="text-center text-neutral-500">
               {comma(mileage)}<br />miles
             </th>
-            {leaseData.terms.map(term => (
+            {trim.leaseData.terms.map(term => (
               <td key={term} className="text-center">
                 {getProgram(term, mileage)}
               </td>

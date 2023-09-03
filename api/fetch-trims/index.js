@@ -1,0 +1,1 @@
+// Fetch trims by model uuid

@@ -12,7 +12,11 @@ export default function TrimCard({ uuid, zip }) {
     async function runEffect() {
       const response = await (await fetch('/api/fetch-trim', {
         method: 'POST',
-        body: JSON.stringify({ uuid, zip }),
+        body: JSON.stringify({
+          uuid,
+          zip,
+          includeLeaseData: true,
+        }),
       })).json()
 
       if (!stale) {
@@ -34,7 +38,11 @@ export default function TrimCard({ uuid, zip }) {
             <PriceTag config={{ label: 'MSRP', value: $(trim.price.msrp + trim.price.destination) }} />
           </div>
           <div className="bg-base-100 overflow-x-auto">
-            {/*<LeaseSchedule trim={trim} leaseData={leaseData}  />*/}
+            {trim.leaseData ? (
+              <LeaseSchedule trim={trim} />
+            ): (
+              <p className="p-4 text-error text-center">No lease data found.</p>
+            )}
           </div>
         </>
       ) : (
