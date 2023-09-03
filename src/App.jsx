@@ -1,8 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import '@/App.css'
-
 import { AppContextProvider } from '@/AppContext'
-
 import NavBar from '@/components/NavBar'
 import Sidebar from '@/components/Sidebar'
 import Footer from '@/components/Footer'
@@ -10,9 +7,11 @@ import HeroBanner from '@/components/HeroBanner'
 import ModelBanner from '@/components/ModelBanner'
 import TrimCard from '@/components/TrimCard'
 import LeaseProgramModal from '@/components/LeaseProgramModal'
+import '@/App.css'
 
 export default function App() {
   const [meta, setMeta] = useState()
+
   useEffect(() => {
     let stale = false
     async function runEffect() {
@@ -22,12 +21,15 @@ export default function App() {
         setMeta(await response.json())
       }
     }
+
     runEffect()
+
     return () => stale = true
   }, [])
 
   const firstField = useRef(null)
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false)
+
   function toggleSidebar() {
     setSidebarIsOpen(!sidebarIsOpen)
   }
@@ -38,10 +40,9 @@ export default function App() {
   }
 
   const [userSelections, setUserSelections] = useState()
-  const [searchResults, setSearchResults] = useState([])
+
   function handleSelectionsChange(newSelections) {
     setUserSelections(newSelections)
-    setSearchResults(newSelections.selectedTrims)
     if (sidebarIsOpen) toggleSidebar() // mobile only
   }
 
@@ -57,7 +58,7 @@ export default function App() {
                 {userSelections ? (
                   <>
                     <ModelBanner userSelections={userSelections} />
-                    {searchResults.map(trim => <TrimCard key={trim} trim={trim} />)}
+                    {userSelections.trims.map(uuid => <TrimCard key={uuid} uuid={uuid} zip={userSelections.zip} />)}
                   </>
                 ) : (
                   <HeroBanner onGetStarted={handleGetStarted} />

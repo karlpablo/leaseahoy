@@ -1,11 +1,11 @@
 export default function ModelBanner({ userSelections }) {
-  const { selectedYear, selectedMake, selectedModel } = userSelections
+  const { year, make, model } = userSelections
 
   return (
     <div className="flex flex-col md:flex-row gap-4 justify-between">
       <div className="basis-full flex justify-center bg-base-200 text-base-content p-4 rounded shadow">
         <span className="font-extrabold text-xl lg:text-2xl tracking-tight">
-          {selectedYear} {selectedMake} {selectedModel}
+          {year} {make} {model}
         </span>
       </div>
       <div className="flex gap-2 justify-center items-center bg-base-200 text-base-content font-bold font-mono p-4 rounded shadow">
