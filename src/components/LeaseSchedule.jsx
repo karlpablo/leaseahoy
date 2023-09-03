@@ -64,7 +64,7 @@ export default function LeaseSchedule({ trim }) {
         program.value = 1
       } else if (program.monthlyTotal < best.monthlyTotal * 1.05) {
         program.value = 4
-      } else if (program.monthlyTotal > worst.monthlyTotal * 0.90) {
+      } else if (program.monthlyTotal > worst.monthlyTotal * 0.95) {
         program.value = 2
       }
     })
@@ -74,7 +74,9 @@ export default function LeaseSchedule({ trim }) {
 
   function getProgram(term, mileage) {
     const program = programs.find(p => p.mileage === mileage && p.term === term)
-    return program && <LeaseProgram trim={trim} program={program} />
+    return program ? 
+      <LeaseProgram trim={trim} program={program} /> : 
+      <button disabled className="btn btn-xs md:btn-sm 2xl:btn-md font-mono">N/A</button>
   }
 
   return (

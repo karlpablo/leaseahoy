@@ -1,5 +1,5 @@
-export default (leaseData) => {
-  if (!leaseData.terms || Object.values(leaseData.terms).length === 0) return null
+export const processLeaseData = (leaseData) => {
+  if (!leaseData.terms || Object.keys(leaseData.terms).length === 0) return null
 
   const {
     KEY_FOR_TERM: term,

@@ -4,23 +4,26 @@ import LeaseSchedule from '@/components/LeaseSchedule'
 import PriceTag from '@/components/PriceTag'
 
 export default function TrimCard({ uuid, zip }) {
-  const [trim, setTrim] = useState()
+  const [trim, setTrim] = useState(null)
 
   useEffect(() => {
     let stale = false
 
     async function runEffect() {
-      const response = await (await fetch('/api/fetch-trim', {
-        method: 'POST',
-        body: JSON.stringify({
-          uuid,
-          zip,
-          includeLeaseData: true,
-        }),
-      })).json()
+      try {
+        const response = await (await fetch('/api/fetch-trim', {
+          method: 'POST',
+          body: JSON.stringify({
+            uuid,
+            zip,
+          }),
+        })).json()
 
-      if (!stale) {
-        setTrim(response)
+        if (!stale) {
+          setTrim(response)
+        }
+      } catch(e) {
+        console.error('Error loading trim', uuid, zip)
       }
     }
 

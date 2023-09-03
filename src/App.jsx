@@ -39,11 +39,11 @@ export default function App() {
     toggleSidebar()
   }
 
-  const [userSelections, setUserSelections] = useState()
+  const [searchResults, setSearchResults] = useState()
 
-  function handleSelectionsChange(newSelections) {
-    setUserSelections(newSelections)
-    if (sidebarIsOpen) toggleSidebar() // mobile only
+  function handleSearch(newParameters) {
+    setSearchResults(newParameters) // technically, we're not really "searching"
+    if (sidebarIsOpen) toggleSidebar() // only on mobile
   }
 
   return (
@@ -55,17 +55,17 @@ export default function App() {
             <div className="drawer lg:drawer-open h-full">
               <input type="checkbox" id="sidebar" className="drawer-toggle" checked={sidebarIsOpen} readOnly />
               <div className="drawer-content bg-slate-600 overflow-y-auto p-4 lg:p-6 space-y-4">
-                {userSelections ? (
+                {searchResults ? (
                   <>
-                    <ModelBanner userSelections={userSelections} />
-                    {userSelections.trims.map(uuid => <TrimCard key={uuid} uuid={uuid} zip={userSelections.zip} />)}
+                    <ModelBanner searchResults={searchResults} />
+                    {searchResults.trims.map(uuid => <TrimCard key={uuid} uuid={uuid} zip={searchResults.zip} />)}
                   </>
                 ) : (
                   <HeroBanner onGetStarted={handleGetStarted} />
                 )}
               </div>
               <div className="drawer-side z-50 lg:h-full">
-                <Sidebar meta={meta} onChange={handleSelectionsChange} firstField={firstField} />
+                <Sidebar meta={meta} onSearch={handleSearch} firstField={firstField} />
                 <label htmlFor="sidebar" className="drawer-overlay z-10" onClick={toggleSidebar}></label> 
               </div>
             </div>

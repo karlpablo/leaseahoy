@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export default function Sidebar({ meta, onChange, firstField }) {
+export default function Sidebar({ meta, onSearch, firstField }) {
   const [ availableYears, setAvailableYears ] = useState([])
   const [ availableMakes, setAvailableMakes ] = useState([])
   const [ availableModels, setAvailableModels ] = useState([])
@@ -37,8 +37,9 @@ export default function Sidebar({ meta, onChange, firstField }) {
     e.preventDefault()
     const formData = new FormData(e.target)
     const formJson = Object.fromEntries(formData.entries())
+    // notice we're copying trims from selectedModel, not from the one in the formJson which is just a string
     formJson.trims = selectedModel.trims
-    onChange(formJson)
+    onSearch(formJson)
   }
 
   return (

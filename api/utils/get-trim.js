@@ -1,3 +1,3 @@
 import trims from '../data/trims.json'
 
-export default (uuid) => trims.find(trim => trim.uuid === uuid)
+export const getTrim = (uuid) => trims.find(trim => trim.uuid === uuid)

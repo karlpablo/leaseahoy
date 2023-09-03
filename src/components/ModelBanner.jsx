@@ -1,5 +1,5 @@
-export default function ModelBanner({ userSelections }) {
-  const { year, make, model } = userSelections
+export default function ModelBanner({ searchResults }) {
+  const { year, make, model } = searchResults
 
   return (
     <div className="flex flex-col md:flex-row gap-4 justify-between">
