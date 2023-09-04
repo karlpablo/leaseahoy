@@ -37,7 +37,7 @@ export default function TrimCard({ uuid, zip }) {
       {trim ? (
         <>
           <div className="bg-base-200 text-base-content w-full p-4 flex flex-col sm:flex-row sm:justify-between items-center space-y-4 sm:space-y-0">
-            <h3 className="text-center lg:text-left text-lg tracking-tight">{trim.trim} {trim.style}</h3>
+            <h3 className="text-center lg:text-left text-lg tracking-tight">{trim.trim} {trim.description}</h3>
             <PriceTag config={{ label: 'MSRP', value: $(trim.price.msrp + trim.price.destination) }} />
           </div>
           <div className="bg-base-100 overflow-x-auto">

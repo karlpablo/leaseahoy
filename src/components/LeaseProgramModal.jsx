@@ -55,7 +55,7 @@ export default function LeaseProgramModal() {
           <div className={"p-6 flex flex-col md:flex-row justify-between items-center rounded-2xl gap-4 " + priceClass}>
             <div className="text-center md:text-left tracking-tight">
               <div className="font-extrabold">{trim.year} {trim.make} {trim.model}</div>
-              <h3 className="text-md lg:text-xl">{trim.trim} {trim.style}</h3>
+              <h3 className="text-md lg:text-xl">{trim.trim} {trim.description}</h3>
             </div>
             <PriceTag config={priceTagConfig} />
           </div>
