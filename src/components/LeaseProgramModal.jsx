@@ -53,9 +53,12 @@ export default function LeaseProgramModal() {
       <form ref={form} method="dialog" className="modal-box w-11/12 max-w-5xl">
         <div className="space-y-6">
           <div className={"p-6 flex flex-col md:flex-row justify-between items-center rounded-2xl gap-4 " + priceClass}>
-            <div className="text-center md:text-left tracking-tight">
-              <div className="font-extrabold">{trim.year} {trim.make} {trim.model}</div>
-              <h3 className="text-md lg:text-xl">{trim.trim} {trim.description}</h3>
+            <div className="text-center md:text-left leading-tight">
+              <h3 className="flex flex-col">
+                <span className="font-extrabold">{trim.year} {trim.make} {trim.model}</span>
+                <span className="font-extrabold text-2xl">{trim.trim}</span>
+                <span className="text-sm">{trim.description}</span>
+              </h3>
             </div>
             <PriceTag config={priceTagConfig} />
           </div>
