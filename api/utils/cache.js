@@ -35,7 +35,7 @@ export const getCache = async (id, zip) => {
     }
   }
 
-  return cache
+  return cache?.lease_data || null
 }
 
 export const setCache = async (id, zip, leaseData) => {

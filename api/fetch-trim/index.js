@@ -18,19 +18,19 @@ export const handler = async (event, context) => {
     }
   }
 
-  const cleanTrim = { ...trim }
-  
-  // todo: replace with custom text
-  delete cleanTrim.style
-  
-  // no need to send these back
-  delete cleanTrim.uuid
-  // delete cleanTrim.year
-  // delete cleanTrim.make
-  // delete cleanTrim.model
+  const responseBody = {
+    ...trim,
+    ...(await fetchLeaseData(trim.id, zip)),
+  }
 
-  const responseBody = { ...cleanTrim }
-  responseBody.leaseData = await fetchLeaseData(cleanTrim.id, zip)
+  // we don't need certain fields back
+  delete responseBody.uuid
+  delete responseBody.id
+  delete responseBody.style
+
+  if (process.env.NODE_ENV === 'production') {
+    delete responseBody.isCached
+  }
 
   return {
     statusCode: 200,

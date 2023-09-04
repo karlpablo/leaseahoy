@@ -11,14 +11,16 @@ export const fetchLeaseData = async (id, zip) => {
   } = process.env
 
   const isProd = env === 'production'
-  const cache = isProd ? await getCache(id, zip) : null
-  let leaseData
+  
+  let leaseData = isProd ? await getCache(id, zip) : null
+  let isCached = false
 
-  if (cache) { // only if one exists AND it's not stale
-    leaseData = cache.leaseData
+  if (leaseData) {
+    isCached = true
   } else {
+    let response
     try {
-      const response = await (await fetch(proxyUrl, {
+      response = await (await fetch(proxyUrl, {
         method: 'POST',
         body: JSON.stringify({
           url: String(apiUrl).replace('[ID]', id).replace('[ZIP]', zip),
@@ -36,11 +38,14 @@ export const fetchLeaseData = async (id, zip) => {
 
       leaseData = await JSON.parse(atob(response.httpResponseBody))
     } catch (e) {
-      console.error('Something went wrong with the proxy.', e)
+      console.error('Something went wrong with the proxy.', e, response)
     }
 
     if (isProd) await setCache(id, zip, leaseData)
   }
 
-  return processLeaseData(leaseData)
+  return {
+    isCached,
+    leaseData: processLeaseData(leaseData),
+  }
 }
