@@ -1,15 +1,14 @@
-import * as Sentry from '@sentry/react'
+import * as Sentry from '@sentry/node'
 
 if (process.env.NODE_ENV === 'production') {
-  console.log('Initializing Sentry for API...')
-
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
-    defaultIntegrations: false,
-    environment: 'production',
+    environment: process.env.NODE_ENV,
     sampleRate: 1.0,
     initialScope: {
-      location: 'api',
+      tags: {
+        source: 'api',
+      },
     },
   })
 }

@@ -7,11 +7,12 @@ import './index.css'
 if (import.meta.env.PROD) {
   Sentry.init({
     dsn: import.meta.env.VITE_SENTRY_DSN,
-    defaultIntegrations: false,
-    environment: 'production',
+    environment: import.meta.env.MODE,
     sampleRate: 1.0,
     initialScope: {
-      location: 'src',
+      tags: {
+        source: 'app',
+      },
     },
   })
 }

@@ -1,7 +1,7 @@
+import '../utils/sentry'
 import { checkZip } from '../utils/check-zip'
 import { getTrim } from '../utils/get-trim'
 import { fetchLeaseData } from '../utils/fetch-lease-data'
-import '../utils/sentry'
 
 export const handler = async (event, context) => {
   if (event.httpMethod !== 'POST') return { statusCode: 405 }
