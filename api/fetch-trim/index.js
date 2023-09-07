@@ -24,14 +24,10 @@ export const handler = async (event, context) => {
     ...(await fetchLeaseData(trim.id, zip)),
   }
 
-  // we don't need certain fields back
+  // we don't need certain fields back from trim
   delete responseBody.uuid
   delete responseBody.id
   delete responseBody.style
-
-  if (process.env.NODE_ENV === 'production') {
-    delete responseBody.isCached
-  }
 
   return {
     statusCode: 200,

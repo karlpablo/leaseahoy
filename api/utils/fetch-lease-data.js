@@ -10,14 +10,15 @@ export const fetchLeaseData = async (id, zip) => {
     PROXY_API_KEY: proxyKey,
   } = process.env
 
-  const isProd = env === 'production'
-  
-  let leaseData = isProd ? await getCache(id, zip) : null
-  let isCached = false
+  let debug = {
+    isCached: true,
+  }
 
-  if (leaseData) {
-    isCached = true
-  } else {
+  let leaseData = await getCache(id, zip) // {...} or null
+
+  if (!leaseData) {
+    debug.isCached = false
+
     let response
     try {
       response = await (await fetch(proxyUrl, {
@@ -41,11 +42,14 @@ export const fetchLeaseData = async (id, zip) => {
       console.error('Something went wrong with the proxy.', e, response)
     }
 
-    if (isProd) await setCache(id, zip, leaseData)
+    await setCache(id, zip, leaseData)
   }
 
+  // reshape the lease data for our needs
+  leaseData = processLeaseData(leaseData)
+
   return {
-    isCached,
-    leaseData: processLeaseData(leaseData),
+    leaseData,
+    debug: env === 'development' ? debug : null,
   }
 }
