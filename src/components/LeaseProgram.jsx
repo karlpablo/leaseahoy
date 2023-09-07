@@ -11,7 +11,7 @@ export default function LeaseProgram({ trim, program }) {
     3: 'btn-warning',
     2: 'btn-error',
     1: 'btn-error',
-  }[program?.value] + ' btn btn-xs md:btn-sm 2xl:btn-md font-mono'
+  }[program?.value] + ' btn btn-xs md:btn-sm font-mono hover:brightness-110'
 
   function handleClick(e) {
     e.stopPropagation()

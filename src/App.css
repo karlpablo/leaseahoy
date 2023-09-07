@@ -1,5 +1,5 @@
 .priceTag {
-  @apply flex items-stretch font-mono relative rounded shadow tracking-tight overflow-hidden;
+  @apply flex items-stretch font-mono relative tracking-tight overflow-hidden;
 }
 
 .priceTag label, .priceTag span {
