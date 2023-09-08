@@ -76,7 +76,7 @@ export default function LeaseSchedule({ trim }) {
     const program = programs.find(p => p.mileage === mileage && p.term === term)
     return program ? 
       <LeaseProgram trim={trim} program={program} /> : 
-      <button disabled className="btn btn-xs md:btn-sm 2xl:btn-md font-mono">N/A</button>
+      <span className="font-mono">N/A</span>
   }
 
   return (
@@ -84,7 +84,7 @@ export default function LeaseSchedule({ trim }) {
       <thead>
         <tr>
           <th className="text-center">
-            Base<br />Monthly
+            Money Factor<br />Residual Value
           </th>
           {trim.leaseData.terms.map(term => (
             <th className="text-center" key={term}>

@@ -60,7 +60,7 @@ export default function LeaseProgramModal() {
                 <span className="text-sm">{trim.description}</span>
               </h3>
             </div>
-            <PriceTag config={priceTagConfig} />
+            {/*<PriceTag config={priceTagConfig} />*/}
           </div>
           <div className="stats stats-vertical lg:stats-horizontal shadow w-full bg-base-200 tracking-tight">
             <div className="stat lg:place-items-end">
@@ -83,11 +83,11 @@ export default function LeaseProgramModal() {
               <div className="stat-value text-xl lg:text-3xl font-mono">{program.residualRate}%</div>
               <div className="stat-desc font-mono">{$(program.residual)}</div>
             </div>
-            <div className="stat lg:place-items-end">
+            {/*<div className="stat lg:place-items-end">
               <div className="stat-title">Total Base Payments</div>
               <div className="stat-value text-xl lg:text-3xl font-mono">{$(program.monthlyTotal * program.term)}</div>
               <div className="stat-desc font-mono">{$(program.monthlyTotal)} x {program.term} months</div>
-            </div>
+            </div>*/}
           </div>
           <div className={"collapse collapse-plus bg-base-200 " + (showDisclaimer && 'collapse-open')}>
             <div className="collapse-title font-bold cursor-pointer leading-relaxed uppercase text-base-content opacity-50" onClick={() => setShowDisclaimer(!showDisclaimer)}>

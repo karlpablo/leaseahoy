@@ -5,13 +5,13 @@ import { $ } from '@/utils'
 export default function LeaseProgram({ trim, program }) {
   const { appContext, setAppContext } = useContext(AppContext)
 
-  const buttonClass = {
-    5: 'btn-success',
-    4: 'btn-success',
-    3: 'btn-warning',
-    2: 'btn-error',
-    1: 'btn-error',
-  }[program?.value] + ' btn btn-xs md:btn-sm font-mono hover:brightness-110'
+  const textClass = {
+    5: 'text-success',
+    4: 'text-success',
+    3: 'text-warning',
+    2: 'text-error',
+    1: 'text-error',
+  }[program?.value] + ' xl:text-lg font-mono font-bold'
 
   function handleClick(e) {
     e.stopPropagation()
@@ -28,9 +28,10 @@ export default function LeaseProgram({ trim, program }) {
 
   return (
     program && (
-      <button className={buttonClass} onClick={handleClick}>
-        {$(program.monthlyTotalTaxed)}
-      </button>
+      <div className={textClass}>
+        <span className="tooltip block" data-tip={`${program.apr}% APR `}>{program.mf}</span>
+        <span className="tooltip block" data-tip={$(program.residual)}>{program.residualRate}%</span>
+      </div>
     )
   )
 }
