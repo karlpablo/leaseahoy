@@ -15,7 +15,7 @@ export default function App() {
   useEffect(() => {
     let stale = false
     async function runEffect() {
-      const response = await fetch('/meta.json')
+      const response = await fetch('/meta.min.json')
 
       if (!stale) {
         setMeta(await response.json())

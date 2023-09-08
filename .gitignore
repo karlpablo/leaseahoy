@@ -26,3 +26,4 @@ dist-ssr
 # Local Netlify folder
 .netlify
 api/data/trims.json
+trims.min.json
