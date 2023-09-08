@@ -44,7 +44,7 @@ export default function TrimCard({ uuid, zip }) {
             <PriceTag config={{ label: 'MSRP', value: $(trim.price.msrp + trim.price.destination) }} />
           </div>
           <div className="bg-base-100 overflow-x-auto">
-            {trim.leaseData ? (
+            {trim.leaseData?.programs ? (
               <LeaseSchedule trim={trim} />
             ): (
               <p className="p-4 text-error text-center">No lease data found.</p>
