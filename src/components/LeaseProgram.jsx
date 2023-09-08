@@ -11,7 +11,7 @@ export default function LeaseProgram({ trim, program }) {
     3: 'text-warning',
     2: 'text-error',
     1: 'text-error',
-  }[program?.value] + ' xl:text-lg font-mono font-bold'
+  }[program?.value] + ' xl:text-lg font-mono font-bold cursor-pointer'
 
   function handleClick(e) {
     e.stopPropagation()
