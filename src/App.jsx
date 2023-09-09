@@ -11,6 +11,7 @@ import '@/App.css'
 
 export default function App() {
   const [meta, setMeta] = useState()
+  const [preload, setPreload] = useState()
 
   useEffect(() => {
     let stale = false
@@ -27,6 +28,25 @@ export default function App() {
     return () => stale = true
   }, [])
 
+  useEffect(() => {
+    if (meta) {
+      const { pathname, search } = document.location
+
+      // assume url is /<page>/<year>/<make>/<model>?zip=<zip>
+      const [year, make, model] = pathname.split('/').slice(2)
+      const zip = (new URLSearchParams(search)).get('zip')
+
+      if (year && make && model && zip) {
+        setPreload({
+          year: decodeURIComponent(year),
+          make: decodeURIComponent(make),
+          model: decodeURIComponent(model),
+          zip: decodeURIComponent(zip),
+        })
+      }
+    }
+  }, [meta])
+
   const firstField = useRef(null)
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false)
 
@@ -42,8 +62,13 @@ export default function App() {
   const [searchResults, setSearchResults] = useState()
 
   function handleSearch(newParameters) {
-    setSearchResults(newParameters) // technically, we're not really "searching"
-    if (sidebarIsOpen) toggleSidebar() // only on mobile
+    const { year, make, model, zip } = newParameters
+    history.pushState({}, '', `/rates/${year}/${make}/${model}?zip=${zip}`)
+
+    setSearchResults(newParameters) // technically, we're not really "searching" since we already know the trims for the model selected
+
+    // only on mobile will the sidebar be open when this function triggers, so just close it
+    if (sidebarIsOpen) toggleSidebar()
   }
 
   return (
@@ -65,7 +90,7 @@ export default function App() {
                 )}
               </div>
               <div className="drawer-side z-50 lg:h-full">
-                <Sidebar meta={meta} onSearch={handleSearch} firstField={firstField} />
+                <Sidebar meta={meta} onSearch={handleSearch} firstField={firstField} preload={preload} />
                 <label htmlFor="sidebar" className="drawer-overlay z-10" onClick={toggleSidebar}></label> 
               </div>
             </div>

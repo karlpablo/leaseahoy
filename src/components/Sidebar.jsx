@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
-export default function Sidebar({ meta, onSearch, firstField }) {
+export default function Sidebar({ meta, onSearch, firstField, preload }) {
   const [ availableYears, setAvailableYears ] = useState([])
   const [ availableMakes, setAvailableMakes ] = useState([])
   const [ availableModels, setAvailableModels ] = useState([])
@@ -8,6 +8,9 @@ export default function Sidebar({ meta, onSearch, firstField }) {
   const [ selectedYear, setSelectedYear ] = useState()
   const [ selectedMake, setSelectedMake ] = useState()
   const [ selectedModel, setSelectedModel ] = useState()
+  const [ hasPreloaded, setHasPreloaded ] = useState(false)
+  
+  const form = useRef(null)
 
   useEffect(() => {
     if (meta.length > 0) {
@@ -16,27 +19,50 @@ export default function Sidebar({ meta, onSearch, firstField }) {
   }, [meta])
 
   useEffect(() => {
-    setSelectedYear(availableYears.at(-1))
+    if (preload && !hasPreloaded) {
+      setSelectedZip(preload.zip)
+      setSelectedYear(availableYears.find(year => year.name === preload.year))
+    } else {
+      setSelectedYear(availableYears.at(-1))
+    }
   }, [availableYears])
 
   useEffect(() => {
     if (selectedYear) {
       setAvailableMakes(selectedYear.makes)
-      setSelectedMake(selectedYear.makes[0])
+      if (preload && !hasPreloaded) {
+        setSelectedMake(selectedYear.makes.find(make => make.name === preload.make))
+      } else {
+        setSelectedMake(selectedYear.makes[0])
+      }
     }
   }, [selectedYear])
 
   useEffect(() => {
     if (selectedMake) {
       setAvailableModels(selectedMake.models)
-      setSelectedModel(selectedMake.models[0])
+      if (preload && !hasPreloaded) {
+        setSelectedModel(selectedMake.models.find(model => model.name === preload.model))
+      } else {
+        setSelectedModel(selectedMake.models[0])
+      }
     }
   }, [selectedMake])
 
+  useEffect(() => {
+    if (preload && !hasPreloaded && selectedZip && selectedYear && selectedMake && selectedModel) {
+      setHasPreloaded(true)
+      handleSubmit({
+        target: form.current,
+      })
+    }
+  }, [selectedModel])
+
   function handleSubmit(e) {
-    e.preventDefault()
+    e?.preventDefault?.()
     const formData = new FormData(e.target)
     const formJson = Object.fromEntries(formData.entries())
+
     // notice we're copying trims from selectedModel, not from the one in the formJson which is just a string
     formJson.trims = selectedModel.trims
     onSearch(formJson)
@@ -44,7 +70,7 @@ export default function Sidebar({ meta, onSearch, firstField }) {
 
   return (
     <div className="bg-base-100 p-6 space-y-4 h-full z-50">
-      <form onSubmit={handleSubmit}>
+      <form ref={form} onSubmit={handleSubmit}>
         <div className="form-control">
           <label className="label">
             <span className="label-text">ZIP code</span>
