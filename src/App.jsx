@@ -82,7 +82,6 @@ export default function App() {
               <div className="drawer-content bg-slate-600 overflow-y-auto p-4 lg:p-6 space-y-4">
                 {searchResults ? (
                   <>
-                    <ModelBanner searchResults={searchResults} />
                     {searchResults.trims.map(uuid => <TrimCard key={uuid} uuid={uuid} zip={searchResults.zip} />)}
                   </>
                 ) : (
