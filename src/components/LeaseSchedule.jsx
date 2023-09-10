@@ -73,11 +73,12 @@ export default function LeaseSchedule({ trim }) {
   }, [trim])
 
   return (
-    <table className="hidden sm:table table table-fixed">
+    <table className="table table-xs sm:table-sm table-fixed">
       <thead>
         <tr>
           <th>
-            Money Factor &amp;<br />Residual Value
+            <span className="sm:hidden">MF/RV</span>
+            <span className="hidden sm:inline">Money Factor &amp;<br />Residual Value</span>
           </th>
           {trim.leaseData.terms.map(term => (
             <th key={term}>

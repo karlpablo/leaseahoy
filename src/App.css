@@ -27,9 +27,16 @@ select.select {
 }
 
 table.table {
-  @apply bg-white text-black text-center text-base font-mono;
+  @apply bg-white text-black text-center font-mono;
 }
 
+table.table,
+table.table th,
+table.table td {
+  @apply sm:text-sm lg:text-base;
+}
+
+
 table.table th {
-  @apply text-black text-center text-base font-mono;
+  @apply text-neutral;
 }
