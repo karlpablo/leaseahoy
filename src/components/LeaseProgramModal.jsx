@@ -1,7 +1,7 @@
 import { useState, useContext, useRef } from 'react'
 import { AppContext } from '@/AppContext'
 import { $, k } from '@/utils'
-import PriceTag from '@/components/PriceTag'
+// import PriceTag from '@/components/PriceTag'
 
 export default function LeaseProgramModal() {
   const { appContext, setAppContext } = useContext(AppContext)
@@ -42,11 +42,11 @@ export default function LeaseProgramModal() {
     1: 'bg-error text-error-content',
   }[program?.value]
 
-  const priceTagConfig = {
-    label: 'Base Payment',
-    value: `${$(program?.monthlyTotalTaxed)}/mo`,
-    valueClass: 'text-2xl bg-base-100 text-base-content',
-  }
+  // const priceTagConfig = {
+  //   label: 'Base Payment',
+  //   value: `${$(program?.monthlyTotalTaxed)}/mo`,
+  //   valueClass: 'text-2xl bg-base-100 text-base-content',
+  // }
 
   return (
     program && <dialog className={modalClass}>

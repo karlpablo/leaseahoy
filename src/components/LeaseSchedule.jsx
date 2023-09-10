@@ -70,12 +70,12 @@ export default function LeaseSchedule({ trim }) {
     })
 
     setPrograms(updatedPrograms)
-  }, [])
+  }, [trim])
 
   function getProgram(term, mileage) {
     const program = programs.find(p => p.mileage === mileage && p.term === term)
     return program ? 
-      <LeaseProgram trim={trim} program={program} /> : 
+      <LeaseProgram program={program} /> : 
       <span className="font-mono">N/A</span>
   }
 

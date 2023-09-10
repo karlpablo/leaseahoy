@@ -6,7 +6,7 @@ import Footer from '@/components/Footer'
 import HeroBanner from '@/components/HeroBanner'
 import ModelBanner from '@/components/ModelBanner'
 import TrimCard from '@/components/TrimCard'
-import LeaseProgramModal from '@/components/LeaseProgramModal'
+// import LeaseProgramModal from '@/components/LeaseProgramModal'
 import '@/App.css'
 
 export default function App() {
@@ -97,7 +97,7 @@ export default function App() {
           </main>
           <Footer />
         </div>
-        <LeaseProgramModal />
+        {/*<LeaseProgramModal />*/}
       </>)}
     </AppContextProvider>
   )

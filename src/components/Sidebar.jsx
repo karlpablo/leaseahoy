@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 export default function Sidebar({ meta, onSearch, firstField, preload }) {
   const [ availableYears, setAvailableYears ] = useState([])
@@ -11,6 +11,16 @@ export default function Sidebar({ meta, onSearch, firstField, preload }) {
   const [ hasPreloaded, setHasPreloaded ] = useState(false)
   
   const form = useRef(null)
+
+  const handleSubmit = useCallback(e => {
+    e?.preventDefault?.()
+    const formData = new FormData(e.target)
+    const formJson = Object.fromEntries(formData.entries())
+
+    // notice we're copying trims from selectedModel, not from the one in the formJson which is just a string
+    formJson.trims = selectedModel.trims
+    onSearch(formJson)
+  }, [onSearch, selectedModel])
 
   useEffect(() => {
     if (meta.length > 0) {
@@ -25,7 +35,7 @@ export default function Sidebar({ meta, onSearch, firstField, preload }) {
     } else {
       setSelectedYear(availableYears.at(-1))
     }
-  }, [availableYears])
+  }, [preload, hasPreloaded, availableYears])
 
   useEffect(() => {
     if (selectedYear) {
@@ -36,7 +46,7 @@ export default function Sidebar({ meta, onSearch, firstField, preload }) {
         setSelectedMake(selectedYear.makes[0])
       }
     }
-  }, [selectedYear])
+  }, [preload, hasPreloaded, selectedYear])
 
   useEffect(() => {
     if (selectedMake) {
@@ -47,7 +57,7 @@ export default function Sidebar({ meta, onSearch, firstField, preload }) {
         setSelectedModel(selectedMake.models[0])
       }
     }
-  }, [selectedMake])
+  }, [preload, hasPreloaded, selectedMake])
 
   useEffect(() => {
     if (preload && !hasPreloaded && selectedZip && selectedYear && selectedMake && selectedModel) {
@@ -56,17 +66,7 @@ export default function Sidebar({ meta, onSearch, firstField, preload }) {
         target: form.current,
       })
     }
-  }, [selectedModel])
-
-  function handleSubmit(e) {
-    e?.preventDefault?.()
-    const formData = new FormData(e.target)
-    const formJson = Object.fromEntries(formData.entries())
-
-    // notice we're copying trims from selectedModel, not from the one in the formJson which is just a string
-    formJson.trims = selectedModel.trims
-    onSearch(formJson)
-  }
+  }, [preload, hasPreloaded, selectedZip, selectedYear, selectedMake, selectedModel, handleSubmit])
 
   return (
     <div className="bg-base-100 p-6 space-y-4 h-full z-50">

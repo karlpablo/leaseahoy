@@ -1,5 +1,3 @@
-import ThumbsUp from '@/icons/ThumbsUp'
-import ThumbsDown from '@/icons/ThumbsDown'
 import Star from '@/icons/Star'
 
 export default function ModelBanner({ searchResults }) {

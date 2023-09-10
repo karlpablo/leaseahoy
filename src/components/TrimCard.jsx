@@ -30,7 +30,7 @@ export default function TrimCard({ uuid, zip }) {
     runEffect()
 
     return () => stale = true
-  }, [])
+  }, [uuid, zip])
 
   return (
     <div className="rounded overflow-hidden shadow">

@@ -1,9 +1,9 @@
-import { useContext } from 'react'
-import { AppContext } from '@/AppContext'
+// import { useContext } from 'react'
+// import { AppContext } from '@/AppContext'
 import { $ } from '@/utils'
 
-export default function LeaseProgram({ trim, program }) {
-  const { appContext, setAppContext } = useContext(AppContext)
+export default function LeaseProgram({ program }) {
+  // const { appContext, setAppContext } = useContext(AppContext)
 
   const textClass = {
     5: 'text-success',
@@ -13,6 +13,7 @@ export default function LeaseProgram({ trim, program }) {
     1: 'text-error',
   }[program?.value] + ' xl:text-lg font-mono font-bold cursor-pointer'
 
+  /*
   function handleClick(e) {
     e.stopPropagation()
     
@@ -25,6 +26,7 @@ export default function LeaseProgram({ trim, program }) {
       },
     })
   }
+  */
 
   return (
     program && (

@@ -3,7 +3,7 @@ import { checkZip } from '../utils/check-zip'
 import { getTrim } from '../utils/get-trim'
 import { fetchLeaseData } from '../utils/fetch-lease-data'
 
-export const handler = async (event, context) => {
+export const handler = async (event) => {
   if (event.httpMethod !== 'POST') return { statusCode: 405 }
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204 }
 

@@ -1,4 +1,5 @@
-/* eslint-disable */
+import defaultTheme from 'tailwindcss/defaultTheme'
+
 export default {
   content: [
     "./index.html",
@@ -7,6 +8,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        'sans': ['Inter', ...defaultTheme.fontFamily.sans],
+        'mono': ['IBM Plex Mono'],
         'cursive': ['Lobster'],
       },
     },
