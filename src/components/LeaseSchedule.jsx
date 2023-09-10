@@ -72,22 +72,15 @@ export default function LeaseSchedule({ trim }) {
     setPrograms(updatedPrograms)
   }, [trim])
 
-  function getProgram(term, mileage) {
-    const program = programs.find(p => p.mileage === mileage && p.term === term)
-    return program ? 
-      <LeaseProgram program={program} /> : 
-      <span className="font-mono">N/A</span>
-  }
-
   return (
-    <table className="table lg:table-fixed table-xs sm:table-sm md:table-md 2xl:table-lg">
+    <table className="hidden sm:table table table-fixed">
       <thead>
         <tr>
-          <th className="text-center">
-            Money Factor<br />Residual Value
+          <th>
+            Money Factor &amp;<br />Residual Value
           </th>
           {trim.leaseData.terms.map(term => (
-            <th className="text-center" key={term}>
+            <th key={term}>
               {term}<br />months
             </th>
           ))}
@@ -96,12 +89,12 @@ export default function LeaseSchedule({ trim }) {
       <tbody>
         {trim.leaseData.mileages.map(mileage => (
           <tr key={mileage}>
-            <th className="text-center text-neutral-500">
+            <th>
               {comma(mileage)}<br />miles
             </th>
             {trim.leaseData.terms.map(term => (
-              <td key={term} className="text-center">
-                {getProgram(term, mileage)}
+              <td key={term}>
+                <LeaseProgram trim={trim} programs={programs} term={term} mileage={mileage} />
               </td>
             ))}
           </tr>

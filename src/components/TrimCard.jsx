@@ -36,7 +36,7 @@ export default function TrimCard({ uuid, zip }) {
     <div className="rounded overflow-hidden shadow">
       {trim ? (
         <>
-          <div className="bg-base-200 text-base-content w-full p-6 flex flex-col md:flex-row md:justify-between items-center md:items-center gap-y-6">
+          <div className="bg-base-300 text-base-content w-full p-6 flex flex-col md:flex-row md:justify-between items-center md:items-center gap-y-6">
             <h3 className="text-center md:text-left text-lg flex flex-col">
               <span className="font-extrabold">{trim.trim}</span>
               <span className="font-serif">{trim.description}</span>

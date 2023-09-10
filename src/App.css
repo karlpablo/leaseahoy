@@ -25,3 +25,11 @@ select.select {
 .priceTag span {
   @apply bg-white text-black;
 }
+
+table.table {
+  @apply bg-white text-black text-center text-base font-mono;
+}
+
+table.table th {
+  @apply text-black text-center text-base font-mono;
+}

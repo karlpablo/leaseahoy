@@ -2,8 +2,9 @@
 // import { AppContext } from '@/AppContext'
 import { $ } from '@/utils'
 
-export default function LeaseProgram({ program }) {
+export default function LeaseProgram({ programs, term, mileage }) {
   // const { appContext, setAppContext } = useContext(AppContext)
+  const program = programs.find(p => p.mileage === mileage && p.term === term)
 
   const textClass = {
     5: 'text-success',
@@ -11,12 +12,15 @@ export default function LeaseProgram({ program }) {
     3: 'text-warning',
     2: 'text-error',
     1: 'text-error',
-  }[program?.value] + ' xl:text-lg font-mono font-bold cursor-pointer'
+  }[program?.value] + ' font-mono font-bold cursor-pointer'
 
-  /*
   function handleClick(e) {
     e.stopPropagation()
+
+    // don't show modal (for now)
+    return
     
+    /*
     setAppContext({
       ...appContext,
       leaseProgramModal: {
@@ -25,15 +29,18 @@ export default function LeaseProgram({ program }) {
         program,
       },
     })
+    */
   }
-  */
 
   return (
-    program && (
-      <div className={textClass}>
+    program ? (
+      <div className={textClass} onClick={handleClick}>
+        {/*$(program.monthlyTotal)*/}
         <span className="tooltip block" data-tip={`${program.apr}% APR `}>{program.mf}</span>
         <span className="tooltip block" data-tip={$(program.residual)}>{program.residualRate}%</span>
       </div>
+    ) : (
+      <span>N/A</span>
     )
   )
 }
