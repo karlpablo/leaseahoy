@@ -40,3 +40,15 @@ table.table td {
 table.table th {
   @apply text-neutral;
 }
+
+.numberedStar {
+  @apply relative z-20;
+}
+
+.numberedStar span {
+  @apply absolute z-30 inset-0;
+}
+
+.numberedStar svg {
+/*  @apply scale-50;*/
+}

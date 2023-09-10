@@ -77,8 +77,11 @@ export default function LeaseSchedule({ trim }) {
       <thead>
         <tr>
           <th>
+            Rating
+            {/*
             <span className="sm:hidden">MF/RV</span>
             <span className="hidden sm:inline">Money Factor &amp;<br />Residual Value</span>
+            */}
           </th>
           {trim.leaseData.terms.map(term => (
             <th key={term}>
