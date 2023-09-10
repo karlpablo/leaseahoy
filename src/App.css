@@ -1,15 +1,27 @@
+form label.label {
+  @apply font-bold;
+}
+
+form label.label span.label-text-alt {
+  @apply font-normal;
+}
+
+select.select {
+  @apply font-normal text-base;
+}
+
 .priceTag {
-  @apply flex items-stretch font-mono relative tracking-tight overflow-hidden;
+  @apply flex flex-row md:flex-col items-stretch font-mono overflow-hidden rounded;
 }
 
 .priceTag label, .priceTag span {
-  @apply px-3 py-1 flex place-items-center;
+  @apply px-3 text-center;
 }
 
 .priceTag label {
-  @apply text-sm max-w-[5rem] text-right;
+  @apply bg-neutral text-neutral-content;
 }
 
 .priceTag span {
-  @apply font-extrabold;
+  @apply bg-white text-black;
 }

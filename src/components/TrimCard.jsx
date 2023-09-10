@@ -36,10 +36,10 @@ export default function TrimCard({ uuid, zip }) {
     <div className="rounded overflow-hidden shadow">
       {trim ? (
         <>
-          <div className="bg-base-200 text-base-content w-full p-4 flex flex-col md:flex-row md:justify-between items-center gap-y-4">
+          <div className="bg-base-200 text-base-content w-full p-6 flex flex-col md:flex-row md:justify-between items-center md:items-center gap-y-6">
             <h3 className="text-center md:text-left text-lg flex flex-col">
               <span className="font-extrabold">{trim.trim}</span>
-              <span className="text-sm">{trim.description}</span>
+              <span className="font-serif">{trim.description}</span>
             </h3>
             <PriceTag config={{ label: 'MSRP', value: $(trim.price.msrp + trim.price.destination) }} />
           </div>
@@ -47,7 +47,7 @@ export default function TrimCard({ uuid, zip }) {
             {trim.leaseData?.programs ? (
               <LeaseSchedule trim={trim} />
             ): (
-              <p className="p-4 text-error text-center">No lease data found.</p>
+              <p className="p-6 text-error text-center">No lease data found.</p>
             )}
           </div>
         </>

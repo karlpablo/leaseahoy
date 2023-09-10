@@ -57,12 +57,12 @@ export default function LeaseProgramModal() {
               <h3 className="flex flex-col">
                 <span className="font-extrabold">{trim.year} {trim.make} {trim.model}</span>
                 <span className="font-extrabold text-2xl">{trim.trim}</span>
-                <span className="text-sm">{trim.description}</span>
+                <span className="text-base">{trim.description}</span>
               </h3>
             </div>
             {/*<PriceTag config={priceTagConfig} />*/}
           </div>
-          <div className="stats stats-vertical lg:stats-horizontal shadow w-full bg-base-200 tracking-tight">
+          <div className="stats stats-vertical lg:stats-horizontal shadow w-full bg-base-200">
             <div className="stat lg:place-items-end">
               <div className="stat-title">MSRP</div>
               <div className="stat-value text-xl lg:text-3xl font-mono">{$(trim.price.msrp + trim.price.destination)}</div>

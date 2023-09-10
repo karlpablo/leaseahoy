@@ -69,14 +69,14 @@ export default function Sidebar({ meta, onSearch, firstField, preload }) {
   }, [preload, hasPreloaded, selectedZip, selectedYear, selectedMake, selectedModel, handleSubmit])
 
   return (
-    <div className="bg-base-100 p-6 space-y-4 h-full z-50">
-      <form ref={form} onSubmit={handleSubmit}>
+    <div className="bg-base-100 p-6 h-full z-50">
+      <form ref={form} onSubmit={handleSubmit} className="space-y-4">
         <div className="form-control">
           <label className="label">
             <span className="label-text">ZIP code</span>
             <span className="label-text-alt">(US only)</span>
           </label>
-          <input ref={firstField} name="zip" type="number" placeholder="12345" className="input input-bordered font-mono" value={selectedZip} onChange={e => setSelectedZip(e.target.value.trim().slice(0, 5))} />
+          <input ref={firstField} name="zip" type="number" placeholder="12345" className="input input-bordered" value={selectedZip} onChange={e => setSelectedZip(e.target.value.trim().slice(0, 5))} />
         </div>
         <div className="form-control">
           <label className="label">
