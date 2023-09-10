@@ -69,7 +69,7 @@ export default function Sidebar({ meta, onSearch, firstField, preload }) {
   }, [preload, hasPreloaded, selectedZip, selectedYear, selectedMake, selectedModel, handleSubmit])
 
   return (
-    <div className="bg-base-100 p-6 h-full z-50">
+    <div className="bg-base-100 p-6 h-full z-50 overflow-y-auto">
       <form ref={form} onSubmit={handleSubmit} className="space-y-4">
         <div className="form-control">
           <label className="label">
