@@ -47,7 +47,7 @@ export default function TrimCard({ uuid, zip }) {
             {trim.leaseData?.programs ? (
               <LeaseSchedule trim={trim} />
             ): (
-              <p className="p-6 text-error text-center">No lease data found.</p>
+              <p className="p-6 text-center font-mono">No lease data found.</p>
             )}
           </div>
         </>
