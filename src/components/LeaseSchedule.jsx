@@ -85,7 +85,7 @@ export default function LeaseSchedule({ trim }) {
           </th>
           {trim.leaseData.terms.map(term => (
             <th key={term}>
-              {term}<br />months
+              {term} <br className="visible sm:hidden" />months
             </th>
           ))}
         </tr>
@@ -94,7 +94,7 @@ export default function LeaseSchedule({ trim }) {
         {trim.leaseData.mileages.map(mileage => (
           <tr key={mileage}>
             <th>
-              {comma(mileage)}<br />miles
+              {comma(mileage)} <br className="visible sm:hidden" />miles
             </th>
             {trim.leaseData.terms.map(term => (
               <td key={term}>
