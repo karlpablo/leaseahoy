@@ -1,8 +1,13 @@
-# React + Vite
+# LeaseAhoy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+An aggregation tool for automotive lease rates directly from the auto makers.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Allows users to compare rates and find the most cost-effective ones (i.e. lowest monthly payment given the same factors).
+
+Prevents users from being preyed upon by shady dealerships by being informed of the actual base rates.
+
+## Links
+[leaseahoy.com](https://leaseahoy.com)
+
